@@ -1,7 +1,6 @@
+## Pandas Data Cleaning
 
-## Pandas  [Suggested Time: 15 minutes]
-
-In this section you will be doing some preprocessing for a dataset for the videogame FIFA19 (https://www.kaggle.com/karangadiya/fifa19).  The dataset contains both data for the game as well as information about the players' real life careers.
+In this checkpoint you will be doing some preprocessing for a dataset for the videogame FIFA19 (https://www.kaggle.com/karangadiya/fifa19).  The dataset contains both data for the game as well as information about the players' real life careers.
 
 **1) Read the CSV file into a pandas dataframe**
 
@@ -20,6 +19,10 @@ warnings.filterwarnings('ignore')
 
 ```python
 df = pd.read_csv('./data/fifa.csv')
+```
+
+
+```python
 df.head()
 ```
 
@@ -69,7 +72,7 @@ df.head()
   </thead>
   <tbody>
     <tr>
-      <td>0</td>
+      <th>0</th>
       <td>158023</td>
       <td>L. Messi</td>
       <td>31</td>
@@ -93,7 +96,7 @@ df.head()
       <td>226500.0</td>
     </tr>
     <tr>
-      <td>1</td>
+      <th>1</th>
       <td>20801</td>
       <td>Cristiano Ronaldo</td>
       <td>33</td>
@@ -117,7 +120,7 @@ df.head()
       <td>127100.0</td>
     </tr>
     <tr>
-      <td>2</td>
+      <th>2</th>
       <td>190871</td>
       <td>Neymar Jr</td>
       <td>26</td>
@@ -141,7 +144,7 @@ df.head()
       <td>228100.0</td>
     </tr>
     <tr>
-      <td>3</td>
+      <th>3</th>
       <td>193080</td>
       <td>De Gea</td>
       <td>27</td>
@@ -165,7 +168,7 @@ df.head()
       <td>138600.0</td>
     </tr>
     <tr>
-      <td>4</td>
+      <th>4</th>
       <td>192985</td>
       <td>K. De Bruyne</td>
       <td>27</td>
@@ -197,7 +200,6 @@ df.head()
 
 
 ```python
-# code here to see the size of the dataframe
 df.shape
 ```
 
@@ -208,19 +210,17 @@ df.shape
 
 
 
-**2. Drop n/a rows for "Release Clause"**
+**2. Drop rows with missing values for for `Release Clause`**
     
-**Drop rows for which "Release Clause" is none or not given. This is part of a soccer player's contract dealing with being bought out by another team. After you have dropped them, see how many rows are remaining.**
+**Drop rows for which `Release Clause` is none or not given. This is part of a soccer player's contract dealing with being bought out by another team. After you have dropped them, see how many rows are remaining.**
 
 
 ```python
-# code here to drop n/a rows
 df.dropna(subset=['Release Clause'],inplace=True)
 ```
 
 
 ```python
-# now check how many rows are left 
 df.shape
 ```
 
@@ -231,15 +231,14 @@ df.shape
 
 
 
-**3) Convert the Release Clause Price from Euros to Dollars**
+**3) Convert the `Release Clause` Price from Euros to Dollars**
 
-Now that there are no n/a values, we can change the values in the `Release Clause` column from Euro to Dollar amounts.
+Now that there are no missing values, we can change the values in the `Release Clause` column from Euro to Dollar amounts.
 
-Assume the current Exchange Rate is
+Assume the current exchange rate is
 `1 Euro = 1.2 Dollars`
 
 
 ```python
-# code here to convert the column of euros to dollarss
 df['Release Clause'] = df['Release Clause'] * 1.2
 ```
