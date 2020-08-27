@@ -19,34 +19,42 @@ warnings.filterwarnings('ignore')
 
 
 ```python
-# __SOLUTION__ 
-import pandas as pd
-import numpy as np
-import warnings
-warnings.filterwarnings('ignore')
-```
+### BEGIN SOLUTION
 
 
-```python
-# Replace None with appropriate code
-df = None
-```
+from test_scripts.test_class import Test
+test = Test()
 
-
-```python
-# __SOLUTION__ 
 df = pd.read_csv('./data/fifa.csv')
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
 ```python
-# Code here to check the first few rows of the DataFrame
+### BEGIN HIDDEN TESTS
+
+test.run_test()
+
+
+### END HIDDEN TESTS
 ```
 
 
 ```python
-# __SOLUTION__
+### BEGIN SOLUTION
+
 df.head()
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
@@ -223,14 +231,25 @@ df.head()
 
 
 ```python
-# Code here to see the size of the DataFrame
+### BEGIN HIDDEN TESTS
 
+test.run_test()
+
+
+### END HIDDEN TESTS
 ```
 
 
 ```python
-# __SOLUTION__ 
+### BEGIN SOLUTION
+
 df.shape
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
@@ -240,32 +259,54 @@ df.shape
 
 
 
+
+```python
+### BEGIN HIDDEN TESTS
+
+test.run_test()
+
+
+### END HIDDEN TESTS
+```
+
 **2. Drop rows with missing values for for `Release Clause`**
     
 **Drop rows for which `Release Clause` is none or not given. This is part of a soccer player's contract dealing with being bought out by another team. After you have dropped them, see how many rows are remaining.**
 
 
 ```python
-# Code here to drop rows with missing values for 'Release Clause'
+### BEGIN SOLUTION
 
-```
-
-
-```python
-# __SOLUTION__ 
 df.dropna(subset=['Release Clause'],inplace=True)
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
 ```python
-# Code here to check how many rows are left 
+### BEGIN HIDDEN TESTS
 
+test.run_test()
+
+
+### END HIDDEN TESTS
 ```
 
 
 ```python
-# __SOLUTION__ 
+### BEGIN SOLUTION
+
 df.shape
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
@@ -274,6 +315,16 @@ df.shape
     (16643, 88)
 
 
+
+
+```python
+### BEGIN HIDDEN TESTS
+
+test.run_test()
+
+
+### END HIDDEN TESTS
+```
 
 **3) Convert the `Release Clause` Price from Euros to Dollars**
 
@@ -284,16 +335,23 @@ Assume the current exchange rate is
 
 
 ```python
-# Code here to convert the column of euros to dollars
-```
+### BEGIN SOLUTION
 
-
-```python
-# __SOLUTION__ 
 df['Release Clause'] = df['Release Clause'] * 1.2
+
+test.save()
+
+
+
+### END SOLUTION
 ```
 
 
 ```python
+### BEGIN HIDDEN TESTS
 
+test.run_test()
+
+
+### END HIDDEN TESTS
 ```
