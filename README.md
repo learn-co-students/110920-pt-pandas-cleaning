@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings('ignore')
 ```
 
-### 1. Read the CSV file into a pandas dataframe**
+### 1. Read the CSV file into a pandas dataframe
 
 The data you'll be working with is found in a file called `'./data/fifa.csv'`.  
 
