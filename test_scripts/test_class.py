@@ -6,6 +6,7 @@ import pickle as pkl
 
 import numpy as np
 import pandas as pd
+import math
 
 import sklearn.neighbors
 
@@ -98,11 +99,15 @@ class Test():
         }
 
         self.obj_tests_dict_kwargs = {
-            np.ndarray: {'err_msg': **kwargs['statement']},
+            np.ndarray: {},
             pd.core.series.Series: {},
             pd.core.frame.DataFrame: {'check_like': True},
             types.MethodType: {},
             sklearn.neighbors._classification.KNeighborsClassifier: {}
+        }
+        
+        self.assert_dict = {
+            'float': math.isclose
         }
 
         return        
@@ -221,12 +226,12 @@ class Test():
         else:
             display(Markdown('❌ **Try Again**'))
 
-    def run_test(self, obj, name, statement=None):
+    def run_test(self, obj, name, flag=None, asserts=None):
         '''
         runs assert against obj and f"self.dir/{name+'.pkl'}"
 
         checks type of obj and, if type has assert method in self.obj_tests_dict, runs
-        that assert method instead.  Any kwargs for that asssert method in 
+        that assert method instead.  Any kwargs for that assert method in 
         obj_tests_dict_kwargs are also passed.
         '''
 
@@ -243,7 +248,12 @@ class Test():
             )
 
         else:
-            assert obj == test_obj, statement
+            
+            if asserts==None:
+                assert obj == test_obj, flag
+                 
+            else:
+                assert self.assert_dict[asserts](obj, test_obj, abs_tol=.01)
 
 #             self.output()
 
