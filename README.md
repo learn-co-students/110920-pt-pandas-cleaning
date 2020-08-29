@@ -66,7 +66,17 @@ test.run_test(df_rows_columns,
 ### END HIDDEN TESTS
 ```
 
-### 2. Drop rows with missing values from a specific column, `Release Clause`
+### 2. List some data cleaning steps that might have to be done on raw data
+
+=== BEGIN MARK SCHEME ===
+
+- Drop nulls
+- Change column names
+- Look for nonsensical data values
+
+=== END MARK SCHEME ===
+
+### 3. Drop rows with missing values from a specific column, `Release Clause`
     
 #### A. Drop rows for which the value in the column `Release Clause` is None or not given. 
 
@@ -101,7 +111,7 @@ test.run_test(post_drop,
 ### END HIDDEN TESTS
 ```
 
-### 3. Convert the `Release Clause` Price from Euros to Dollars
+### 4. Convert the `Release Clause` Price from Euros to Dollars
 
 Now that there are no missing values, we can change the values in the `Release Clause` column from Euro to Dollar amounts.
 
