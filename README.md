@@ -34,15 +34,22 @@ from test_scripts.test_class import Test
 test = Test()
 
 df = pd.read_csv('./data/fifa.csv')
+df_first_five = df.head()
+df_rows_columns = df.shape
 
 test.save(df,'df')
-test.save(df.head(), 'df_head')
-test.save(df.shape, 'df_shape')
+test.save(df_first_five, 'df_head')
+test.save(df_rows_columns, 'df_shape')
+
 ### END SOLUTION
 ```
 
 
 ```python
+#PLACE ALL WORK FOR THE ABOVE QUESTION ABOVE THIS CELL
+
+#THIS UNALTERABLE CELL CONTAINS HIDDEN TESTS
+
 ### BEGIN HIDDEN TESTS
 
 from test_scripts.test_class import Test
@@ -80,24 +87,36 @@ test.run_test(df_rows_columns,
     
 #### A. Drop rows for which the value in the column `Release Clause` is None or not given. 
 
-(This is part of a soccer player's contract dealing with being bought out by another team.)**
+(This is part of a soccer player's contract dealing with being bought out by another team.)
 
-#### B. Check the shape of the dataframe after you drop, and assign a tuple with rows and columns to the variable `post_drop`
+#### B. Check the shape of the dataframe after you drop, and assign a tuple with the number of rows and columns (in that order) to the variable `post_drop`
 
 
 ```python
 ### BEGIN SOLUTION
 
+from test_scripts.test_class import Test
+test = Test()
+
 df.dropna(subset=['Release Clause'],inplace=True)
+post_drop = df.shape
+
 test.save(df, 'df_release')
-test.save(df.shape, 'post_drop')
+test.save(post_drop, 'post_drop')
 
 ### END SOLUTION
 ```
 
 
 ```python
+#PLACE ALL WORK FOR THE ABOVE QUESTION ABOVE THIS CELL
+
+#THIS UNALTERABLE CELL CONTAINS HIDDEN TESTS
+
 ### BEGIN HIDDEN TESTS
+
+from test_scripts.test_class import Test
+test = Test()
 
 test.run_test(df, 
               'df_release', 
@@ -125,6 +144,9 @@ Now that there are no missing values, we can change the values in the `Release C
 ```python
 ### BEGIN SOLUTION
 
+from test_scripts.test_class import Test
+test = Test()
+
 df['Release Clause'] = df['Release Clause'] * 1.2
 
 test.save(df['Release Clause'].mean(), 'new_mean')
@@ -135,12 +157,135 @@ test.save(df, 'df_in_dollars')
 
 
 ```python
+#PLACE ALL WORK FOR THE ABOVE QUESTION ABOVE THIS CELL
+
+#THIS UNALTERABLE CELL CONTAINS HIDDEN TESTS
+
 ### BEGIN HIDDEN TESTS
+
+from test_scripts.test_class import Test
+test = Test()
 
 test.run_test(df['Release Clause'].mean(), 
               'new_mean', 
               "looks like you didn't multiply the column by 1.2 and put those new values in the dataframe?",
               'float'
+             )
+
+### END HIDDEN TESTS
+```
+
+### 5. Descriptive Statistics
+
+#### A) What are the mean age and the median age for the players in this dataset?
+- Assign the mean age to `mean_age` and the median age to `median_age`
+
+
+```python
+### BEGIN SOLUTION
+
+from test_scripts.test_class import Test
+test = Test()
+
+mean_age = df['Age'].mean()
+median_age = df['Age'].median()
+
+test.save(mean_age, 'desc_stats_mean_age')
+test.save(median_age, 'desc_stats_median_age')\
+
+### END SOLUTION
+```
+
+
+```python
+#PLACE ALL WORK FOR THE ABOVE QUESTION ABOVE THIS CELL
+
+#THIS UNALTERABLE CELL CONTAINS HIDDEN TESTS
+
+### BEGIN HIDDEN TESTS
+
+from test_scripts.test_class import Test
+test = Test()
+
+test.run_test(mean_age, 
+              'desc_stats_mean_age', 
+              "looks like you didn't calculate the mean age correctly?",
+              'float'
+             )
+
+test.run_test(median_age, 
+              'desc_stats_median_age', 
+              "looks like you didn't calculate the median age correctly?",
+              'float'
+             )
+
+### END HIDDEN TESTS
+```
+
+#### In your own words, how are the mean and median of this data related to each other, and what do these values tell us about the distribution of the variable 'Age'?
+
+=== BEGIN MARK SCHEME ===
+
+"""
+Mean age = 25.23 
+Median age = 25
+
+The average age of all players in the league is 25.22 years. 
+The center of the dataset rests at 25. Since mean and median are pretty similar, 
+age seems to be slightly skewed towards the older end of the spectrum.
+"""
+
+=== END MARK SCHEME ===
+
+#### B) Who is the oldest player from Argentina and how old is he?
+
+- Store a list with your answer in the format `[name, age]` as the variable `oldest_argentine`
+- Make sure `age` is stored as an `int`!
+- Use the `Nationality` column
+
+
+```python
+### SOLUTION
+
+from test_scripts.test_class import Test
+test = Test()
+
+argentines = df.loc[df['Nationality'] == 'Argentina']
+
+oldest_argentine = argentines.loc[argentines['Age'].idxmax(), ['Name', 'Age']].tolist()
+
+test.save(oldest_argentine[0], 'oldest_argentine_name')
+test.save(oldest_argentine[1], 'oldest_argentine_age')
+test.save(oldest_argentine, 'oldest_argentine')
+
+### END SOLUTION
+```
+
+
+```python
+#PLACE ALL WORK FOR THE ABOVE QUESTION ABOVE THIS CELL
+
+#THIS UNALTERABLE CELL CONTAINS HIDDEN TESTS
+
+### BEGIN HIDDEN TESTS
+
+from test_scripts.test_class import Test
+test = Test()
+
+test.run_test(oldest_argentine[0], 
+              'oldest_argentine_name', 
+              "looks like you didn't calculate the name correctly or save it as the first item in the list?",
+             )
+
+test.run_test(oldest_argentine[1], 
+              'oldest_argentine_age', 
+              "looks like you didn't calculate the age correctly or save it as the second item in the list?",
+              'float'
+             )
+
+test.run_test(oldest_argentine,
+              'oldest_argentine',
+              "looks like you didn't put the list together correctly?"
              )
 
 ### END HIDDEN TESTS
